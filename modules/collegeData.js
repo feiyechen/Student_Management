@@ -1,4 +1,5 @@
 let fs = require("fs");
+const { resolve } = require("path");
 
 class Data{
     constructor(students, courses){
@@ -68,6 +69,22 @@ module.exports.getCourses = function(){
     });
 }
 
+module.exports.getCourseById = function(id){
+    return new Promise((resolve, reject)=>{
+        let courserWithId = null;
+        for(var i=0;i<dataCollection.courses.length;i++){
+            if(dataCollection.courses[i].courseId == id){
+                courserWithId = dataCollection.courses[i];
+            }
+        }
+        if(courserWithId == null){
+            reject("query returned 0 results")
+        }else{
+            resolve(courserWithId);
+        }
+    });
+}
+
 module.exports.getStudentsByCourse = function(course){
     return new Promise((resolve, reject)=>{
         let studentWithCourse = [];
@@ -110,6 +127,18 @@ module.exports.addStudents = function(studentData){
             studentData.TA = (studentData.TA) ? true : false;
             studentData.studentNum = dataCollection.students.length + 1;
             dataCollection.students.push(studentData);
+            resolve();
+        }
+    });
+}
+
+module.exports.updateStudent = function(studentData){
+    return new Promise((resolve, reject)=>{
+        if(studentData.firstName == "" || studentData.lastName == ""){
+            reject("Must have valid name");
+        }else{
+            studentData.TA = (studentData.TA) ? true : false;
+            dataCollection.students[studentData.studentNum-1] = studentData;
             resolve();
         }
     });
