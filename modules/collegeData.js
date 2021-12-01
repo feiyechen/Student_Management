@@ -52,7 +52,7 @@ module.exports.initialize = function(){
 
 module.exports.getAllStudents = function(){
     return new Promise((resolve, reject)=>{
-        viewData.student.findAll().then(data=>{
+        Student.findAll().then(data=>{
             resolve(data);
         }).catch(err=>{
             reject("no results returned");
@@ -62,7 +62,7 @@ module.exports.getAllStudents = function(){
 
 module.exports.getStudentsByCourse = function(course){
     return new Promise((resolve, reject)=>{
-        viewData.student.findAll({
+        Student.findAll({
             where: {course: course}
         }).then(data=>{
             resolve(data);
@@ -74,7 +74,7 @@ module.exports.getStudentsByCourse = function(course){
 
 module.exports.getTAs = function(){
     return new Promise((resolve, reject)=>{
-        viewData.student.findAll({
+        Student.findAll({
             where: {TA: true}
         }).then(data=>{
             resolve(data);
@@ -86,7 +86,7 @@ module.exports.getTAs = function(){
 
 module.exports.getStudentsByNum = function(num){
     return new Promise((resolve, reject)=>{
-        viewData.student.findAll({
+        Student.findAll({
             where: {studentNum: num}
         }).then(data=>{
             resolve(data[0]);
@@ -149,7 +149,7 @@ module.exports.updateStudent = function(studentData){
                     studentData[i] = null;
                 }
             }
-            viewData.student.update(studentData, {
+            Student.update(studentData, {
                 where: {studentNum: studentData.studentNum}
             }).then(()=>{
                 resolve();
