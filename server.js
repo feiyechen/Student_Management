@@ -192,7 +192,7 @@ app.post("/students/add", (req, res)=>{
     collegeData.addStudents(req.body).then(()=>{
         res.redirect("/students");
     }).catch(err=>{
-        res.status(500).json({message:"adding students error"});
+        res.status(500).json({message: err});
     })
 });
 
@@ -200,7 +200,7 @@ app.post("/courses/add", (req, res)=>{
     collegeData.addCourse(req.body).then(()=>{
         res.redirect("/courses");
     }).catch(err=>{
-        res.status(500).json({message:"adding courses error"});
+        res.status(500).json({message: err});
     })
 });
 
