@@ -129,7 +129,7 @@ module.exports.addStudents = function(studentData){
                     studentData[i] = null;
                 }
             }
-            viewData.student.create(studentData).then(()=>{
+            Student.create(studentData).then(()=>{
                 resolve();
             }).catch(err=>{
                 reject("unable to create student");
