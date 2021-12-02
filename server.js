@@ -121,7 +121,7 @@ app.get("/student/:num", (req, res)=>{
         //viewData.courses object
 
         for(let i=0;i<viewData.courses.length;i++){
-            if(viewData.courses[i].courseId == viewData.viewData.student.course){
+            if(viewData.courses[i].courseId == viewData.student.course){
                 viewData.courses[i].selected = true;
             }
         }
