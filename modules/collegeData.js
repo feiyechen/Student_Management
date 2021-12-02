@@ -214,7 +214,7 @@ module.exports.deleteCourseById = function(id){
 
 module.exports.deleteStudentByNum = function(num){
     return new Promise((resolve, reject)=>{
-        Stundet.destroy({
+        Student.destroy({
             where: {studentNum: num}
         }).then(()=>{
             resolve();

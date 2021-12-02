@@ -113,7 +113,7 @@ app.get("/student/:num", (req, res)=>{
         }
     }).catch(()=>{
         viewData.student = null; //set student to null if there was an error
-    }).then(data.getCourses).then(data=>{
+    }).then(collegeData.getCourses).then(data=>{
         viewData.courses = data; //store course data in the "viewData" object as "courses"
 
         //loop through viewData.course and once we have found the courseId that matches
