@@ -17,7 +17,7 @@ const exphbs = require("express-handlebars");
 
 const HTTP_PORT = process.env.PORT || 8080;
 
-//configuration for Handlebars
+//#region configuration for Handlebars
 app.engine(".hbs", exphbs.engine({
     extname: ".hbs",
     layout: "main",
@@ -39,12 +39,14 @@ app.engine(".hbs", exphbs.engine({
                 return options.fn(this);
             }
         }
+
     }
 }));
 
 app.set("view engine", ".hbs");
-///////////////////////////////
+//#endregion
 
+//#region USE middlewares
 app.use(express.static("public"));
 
 app.use(express.urlencoded({extended: true}));
@@ -58,6 +60,7 @@ app.use(function(req, res, next){
     app.locals.activeRoute = (route == "/") ? "/" : route.replace(/\/$/, "");
     next();
 });
+//#endregion
 
 app.get("/students", (req, res) => {
     if(req.query.course){
@@ -224,10 +227,11 @@ app.use((req,res,next)=>{
     res.status(404).send("404: Page Not Found!");
 });
 
-// setup http server to listen on HTTP_PORT
+//#region setup http server to listen on HTTP_PORT
 collegeData.initialize().then(()=>{
     // console.log("Server start listening...");
     app.listen(HTTP_PORT);
 }).catch(err=>{
     console.log(err);
 })
+//#endregion
